@@ -52,7 +52,7 @@ function App() {
           <Button variant="outlined" size="large" startIcon={<EmailIcon/>}>Contact Us</Button>
         </header>
         <div className="Signature">
-          Desinged with ❤️ in Minnesota
+          Desinged with <span role="img" aria-label="heart">❤️</span> in Minnesota
         </div>
       </div>
     </div>
