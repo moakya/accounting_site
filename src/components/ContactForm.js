@@ -1,19 +1,24 @@
 import React from 'react'
 // import axios from 'axios'
 import '../App.css'
-import { DialogTitle, Button, FormControl } from '@material-ui/core'
+import { DialogTitle, Button, FormControl, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(2),
+        margin: theme.spacing(1.5),
     },
     container: {
         display: 'flex',
-        alignContent: 'center',
+        alignContent: 'left',
         flexWrap: 'wrap',
         flexDirection: 'column',
+    },
+    button: {
+        display: 'flex',
+        alignContent: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
     },
 }))
 
@@ -34,21 +39,21 @@ const ContactForm = (props) => {
     // const sendFormUrl = "hello"
 
 
-    // const postForm = async () => {
-    //     let headers = {
-    //         'Content-Type': 'application/json'
-    //     }
-    //     console.log('ContactForm %o', contactForm)
-    //     await axios
-    //         .post(sendFormUrl, contactForm, { headers: headers })
-    //         .then((response) => {
-    //             console.log('Status %o', response)
-    //             handleClose()
-    //         })
-    //         .catch((error) => {
-    //             console.log('post form error %o', error)
-    //         })
-    // }
+    const postForm = async () => {
+        // let headers = {
+        //     'Content-Type': 'application/json'
+        // }
+        console.log('ContactForm %o', contactForm)
+        // await axios
+        //     .post(sendFormUrl, contactForm, { headers: headers })
+        //     .then((response) => {
+        //         console.log('Status %o', response)
+        //         handleClose()
+        //     })
+        //     .catch((error) => {
+        //         console.log('post form error %o', error)
+        //     })
+    }
 
     const handleSetContactFormRequest = event => {
         setContactForm({
@@ -62,104 +67,56 @@ const ContactForm = (props) => {
             <DialogTitle>
                 Contact Us
             </DialogTitle>
-            <ValidatorForm 
-                // onSubmit={postForm}
-                className={classes.container}
-            >
+            <div className={classes.container}>
                 <FormControl component="fieldset" className={classes.formControl}>
-                    <TextValidator
-                        id="name"
-                        label="Client Name"
-                        name="name"
-                        value={contactForm.name}
-                        validators={(
-                            'required',
-                            'matchRegexp:^[a-zA-Z0-9]+$',
-                            'minStringLength:2',
-                            'maxStringLength:20'
-                        )}
-                        errorMessages={(
-                            'This is a required field',
-                            'Alphabets only',
-                            'Must be at least 2 characters',
-                            'Must be at most 20 characters'
-                        )}
+                    <TextField
+                        required id="name" name="name" label="Name" 
+                        value={contactForm.name} variant="outlined"
                         onChange={handleSetContactFormRequest}
                     />
                 </FormControl>
 
                 <FormControl component="fieldset" className={classes.formControl}>
-                    <TextValidator
-                        id="email"
-                        label="Client Email"
-                        name="email"
-                        value={contactForm.email}
-                        validators={(
-                            'required',
-                            'matchRegexp:^[a-zA-Z0-9]+$',
-                            'minStringLength:2',
-                            'maxStringLength:20'
-                        )}
-                        errorMessages={(
-                            'This is a required field',
-                            'Alphabets only',
-                            'Must be at least 2 characters',
-                            'Must be at most 20 characters'
-                        )}
+                    <TextField 
+                        required id="email" name="email" label="Email" 
+                        value={contactForm.email} variant="outlined"
                         onChange={handleSetContactFormRequest}
                     />
                 </FormControl>
 
                 <FormControl component="fieldset" className={classes.formControl}>
-                    <TextValidator
-                        id="phoneNumber"
-                        label="Client Phone Number"
-                        name="phoneNumber"
-                        value={contactForm.phoneNumber}
-                        validators={(
-                            'required',
-                            'matchRegexp:^[a-zA-Z0-9]+$',
-                            'minStringLength:2',
-                            'maxStringLength:20'
-                        )}
-                        errorMessages={(
-                            'This is a required field',
-                            'Alphabets only',
-                            'Must be at least 2 characters',
-                            'Must be at most 20 characters'
-                        )}
+                    <TextField 
+                        id="phoneNumber" name="phoneNumber" label="Phone Number" 
+                        value={contactForm.phoneNumber} variant="outlined"
                         onChange={handleSetContactFormRequest}
                     />
                 </FormControl>
 
                 <FormControl component="fieldset" className={classes.formControl}>
-                    <TextValidator
+                    <TextField
                         id="message"
-                        label="Client Message"
+                        label="Message"
                         name="message"
                         value={contactForm.message}
-                        validators={(
-                            'required',
-                            'matchRegexp:^[a-zA-Z0-9]+$',
-                            'minStringLength:2',
-                            'maxStringLength:20'
-                        )}
-                        errorMessages={(
-                            'This is a required field',
-                            'Alphabets only',
-                            'Must be at least 2 characters',
-                            'Must be at most 20 characters'
-                        )}
+                        multiline
+                        rows={12}
+                        variant="outlined"
                         onChange={handleSetContactFormRequest}
                     />
                 </FormControl>
-            </ValidatorForm>
-            <Button type="submit" color="primary">
-                Submit
-            </Button>
-            <Button onClick={handleClose} color="secondary">
-                Close
-            </Button>
+            </div>
+            <div className={classes.button}>
+                <FormControl component="fieldset" className={classes.formControl}>
+                    <Button variant="outlined" onClick={e => postForm()} color="primary">
+                        Submit
+                    </Button>
+                </FormControl>
+                <FormControl component="fieldset" className={classes.formControl}>
+                    <Button variant="outlined" onClick={e => handleClose()} color="secondary">
+                        Close
+                    </Button>
+                </FormControl>
+            </div>
         </React.Fragment>
     )
 }
